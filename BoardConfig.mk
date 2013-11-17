@@ -31,10 +31,6 @@ BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=hammerhea
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02900000 --tags_offset 0x02700000
 BOARD_KERNEL_IMAGE_NAME := zImage-dtb
 
-TARGET_NO_KERNEL := false
-TARGET_USE_GATOR := false
-KERNEL_CONFIG := hammerhead_defconfig
-
 # Shader cache config options
 # Maximum size of the  GLES Shaders that can be cached for reuse.
 # Increase the size if shaders of size greater than 12KB are used.
@@ -104,8 +100,10 @@ BOARD_SEPOLICY_DIRS := \
 BOARD_CUSTOM_BOOTIMG_MK := device/lge/hammerhead/mkbootimg.mk
 
 # Define kernel config for inline building
-TARGET_KERNEL_CONFIG := hammerhead_defconfig
-TARGET_KERNEL_SOURCE := kernel/google/msm
+KERNEL_CONFIG := hammerhead_defconfig
+TARGET_NO_KERNEL := false
+TARGET_USE_GATOR := false
+BUILD_KERNEL_MODULES := false
 
 # The list below is order dependent
 BOARD_SEPOLICY_UNION := \

@@ -19,6 +19,18 @@
 #
 # Everything in this directory will become public
 
+ifeq ($(TARGET_PREBUILT_KERNEL),)
+HAMMERHEAD_LOCAL_KERNEL := device/lge/hammerhead-kernel/zImage-dtb
+$(HAMMERHEAD_LOCAL_KERNEL): android_kernel
+	cp -f $(PRODUCT_OUT)/obj/kernel/arch/arm/boot/zImage-dtb $(HAMMERHEAD_LOCAL_KERNEL)
+else
+HAMMERHEAD_LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
+endif
+
+
+PRODUCT_COPY_FILES := \
+    $(HAMMERHEAD_LOCAL_KERNEL):kernel
+
 PRODUCT_COPY_FILES += \
     device/lge/hammerhead/init.hammerhead.rc:root/init.hammerhead.rc \
     device/lge/hammerhead/init.hammerhead.usb.rc:root/init.hammerhead.usb.rc \
